@@ -7,6 +7,23 @@ namespace RegexFA {
 	RegexNFA::RegexNFA(State* start, std::vector<State>&& states) : start_(start), states_(std::move(states))
 	{ }
 
+	bool RegexNFA::Match(const std::string& input) {
+		std::vector<const State*> current_states{ start_ };
+
+		for(const auto& c : input){
+			current_states = AdvanceStates(current_states, c);
+			AddState(current_states, start_);
+		}
+
+		for (const auto state : current_states) {
+			if (state->IsMatch(State::Condition::Match)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	void RegexNFA::AddState(std::vector<const State*>& vec, const State* state) {
 		//todo check for duplicate
 		if(state == nullptr)
@@ -31,24 +48,5 @@ namespace RegexFA {
 		}
 		return output;
 	}
-
-	bool RegexNFA::IsMatch(const std::vector<const State*>& states) {
-		for (const auto state : states)
-			if (state->IsMatch(State::Condition::Match))
-				return true;
-		return false;
-	}
-
-	bool RegexNFA::Match(const std::string& input) {
-		std::vector<const State*> current_states{ start_ };
-
-		for(const auto& c : input){
-			current_states = AdvanceStates(current_states, c);
-			AddState(current_states, start_);
-		}
-
-		return IsMatch(current_states);
-	}
-
 
 }

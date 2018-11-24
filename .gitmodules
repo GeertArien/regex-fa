@@ -1,0 +1,3 @@
+[submodule "libraries/cmd-parser"]
+	path = libraries/cmd-parser
+	url = git@github.com:GeertArien/cmd-parser.git

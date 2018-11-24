@@ -45,7 +45,7 @@ namespace RegexFA {
 		Frag stack[1000], *stackp, e1, e2, e;
 		State* state = nullptr;
 		std::vector<State> states;
-		states.reserve(1000);
+		states.reserve(postfix_regex.size());
 
 #define push(s) *stackp++ = s
 #define pop()   *--stackp
@@ -100,6 +100,8 @@ namespace RegexFA {
 		e = pop();
 		State match(State::Condition::Match, nullptr, nullptr);
 		patch(e.out, &match);
+		states.shrink_to_fit();
+
 		return {e.start, std::move(states)};
 	}
 
