@@ -98,9 +98,8 @@ namespace RegexFA {
 		}
 
 		e = pop();
-		State match(State::Condition::Match, nullptr, nullptr);
-		patch(e.out, &match);
-		states.shrink_to_fit();
+		state = AddState(states, State::Condition::Match, nullptr, nullptr);
+		patch(e.out, state);
 
 		return {e.start, std::move(states)};
 	}

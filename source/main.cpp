@@ -1,6 +1,6 @@
 #include <iostream>
-#include <CMDArgument.h>
-#include <CMDParser.h>
+#include <Argument.h>
+#include <Parser.h>
 #include "regex/RegexNFA.h"
 #include "regex/NFABuilder.h"
 
@@ -9,11 +9,11 @@ using namespace RegexFA;
 
 
 int main(int argc, const char** argv) {
-	CMDArgument show_help(CMDArgument::Type::Bool, "--help", "show help", false);
-	CMDArgument regex(CMDArgument::Type::String, "--regex", "regular expression", std::string(), true);
-	CMDArgument output(CMDArgument::Type::String, "--input", "input string", std::string(), true);
+	CMD::Argument show_help(CMD::Argument::Type::Bool, "--help", "show help", false);
+	CMD::Argument regex(CMD::Argument::Type::String, "--regex", "regular expression", std::string(), true);
+	CMD::Argument output(CMD::Argument::Type::String, "--input", "input string", std::string(), true);
 
-	CMDParser cmd_parser("--regex ab.b.a. --input abbaba");
+	CMD::Parser cmd_parser("--regex ab.b.a. --input abbaba");
 	cmd_parser.SetArguments({ &show_help, &regex, &output });
 
 	if (!cmd_parser.Parse(argc, argv)) {
