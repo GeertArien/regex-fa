@@ -1,8 +1,8 @@
 #include <iostream>
 #include <Argument.h>
 #include <Parser.h>
-#include "regex/RegexNFA.h"
-#include "regex/NFABuilder.h"
+#include "../source/RegexNFA.h"
+#include "../source/NFABuilder.h"
 
 
 using namespace RegexFA;

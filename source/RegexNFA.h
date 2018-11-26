@@ -11,14 +11,14 @@ namespace RegexFA {
 
 	public:
 		RegexNFA(State* start, std::vector<State>&& states);
-		bool Match(const std::string& input);
+		bool Match(const std::string& input) const;
 
 	private:
 		std::vector<State> states_;
 		State* start_;
 
-		void AddState(std::vector<const State*>& vec, const State* state);
-		std::vector<const State*> AdvanceStates(std::vector<const State*>& states, const char c);
+		static void AddState(std::vector<const State*>& vec, const State* state);
+		static std::vector<const State*> AdvanceStates(std::vector<const State*>& states, const char c);
 
 	};
 

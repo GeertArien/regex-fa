@@ -7,7 +7,7 @@ namespace RegexFA {
 	RegexNFA::RegexNFA(State* start, std::vector<State>&& states) : start_(start), states_(std::move(states))
 	{ }
 
-	bool RegexNFA::Match(const std::string& input) {
+	bool RegexNFA::Match(const std::string& input) const {
 		std::vector<const State*> current_states{ start_ };
 
 		for(const auto& c : input){
