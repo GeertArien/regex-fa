@@ -23,14 +23,14 @@ add_executable(${PROJECT_NAME} ${APP_DIR}/main.cpp)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 
 
-# Regex-FA
+# Regex-FA lib
 set(REGEX_FA_LIB regex-fa-lib)
 add_library(${REGEX_FA_LIB} ${SOURCES})
 set_property(TARGET ${REGEX_FA_LIB} PROPERTY CXX_STANDARD 14)
 target_link_libraries(${PROJECT_NAME} ${REGEX_FA_LIB})
 
 
-# CMD-Parser
+# CMD-Parser external lib
 set(CMD_PARSER_DIR "${LIB_DIR}/cmd-parser")
 add_subdirectory("${CMD_PARSER_DIR}")
 target_link_libraries(${PROJECT_NAME} "cmd-parser")
