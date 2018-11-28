@@ -1,4 +1,5 @@
 #include "RegexNFA.h"
+#include <algorithm>
 #include "State.h"
 
 
@@ -25,11 +26,11 @@ namespace RegexFA {
 	}
 
 	void RegexNFA::AddState(std::vector<const State*>& vec, const State* state) {
-		//todo check for duplicate
-		if(state == nullptr)
+		if(state == nullptr || std::find(vec.begin(), vec.end(), state) != vec.end()) {
 			return;
+		}
+
 		if(state->IsMatch(State::Condition::Split)) {
-			/* follow unlabeled arrows */
 			AddState(vec, state->out);
 			AddState(vec, state->out1);
 		}
@@ -41,10 +42,12 @@ namespace RegexFA {
 	std::vector<const State*> RegexNFA::AdvanceStates(std::vector<const State*>& states, const char c) {
 		std::vector<const State*> output;
 		for(const auto& state : states) {
-			if (state->IsMatch(State::Condition::Match))
+			if (state->IsMatch(State::Condition::Match)) {
 				AddState(output, state);
-			else if (state->IsMatch(c))
+			}
+			else if (state->IsMatch(c)) {
 				AddState(output, state->out);
+			}
 		}
 		return output;
 	}
